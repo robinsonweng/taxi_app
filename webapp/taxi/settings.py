@@ -23,11 +23,16 @@ class Database(BaseModel):
     host: str
     port: int = 5432
 
+class Redis(BaseModel):
+    host: str
+    port: int = 6379
+
 # load setting from env var
 class EnvironmentVariable(BaseSettings):
     model_config = SettingsConfigDict(env_nested_delimiter="__")
 
     database: Database
+    redis: Redis
 
 environment_variable = EnvironmentVariable()
 
@@ -56,6 +61,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # installed libaries, tools
+    'rest_framework',
 
     # django apps
     'apps.trips',
@@ -149,3 +157,17 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'trips.User'
+
+
+REDIS_URL = f"{environment_variable.redis.host}:{environment_variable.redis.port}"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [REDIS_URL],
+        },
+    },
+}
+
+ASGI_APPLICATION = 'taxi.asgi.application'
