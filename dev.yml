@@ -26,6 +26,7 @@ services:
     environment:
       - POSTGRES_USER=${DATABASE__USER}
       - POSTGRES_PASSWORD=${DATABASE__PASSWORD}
+      - POSTGRES_DB=${DATABASE__NAME}
     expose:
       - 5432
     networks:
