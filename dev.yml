@@ -1,0 +1,68 @@
+services:
+  webapp:
+    container_name: django-app
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile.dev
+    depends_on:
+      db:
+        condition: service_started
+      cache:
+        condition: service_started
+    networks:
+      - dbnet
+      - cachenet
+      - proxynet
+    env_file:
+      - .env
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./webapp
+          target: /app
+
+    expose:
+      - 8000
+
+  db:
+    container_name: postgres-db
+    image: postgres:16.3
+    environment:
+      - POSTGRES_USER=${DATABASE__USER}
+      - POSTGRES_PASSWORD=${DATABASE__PASSWORD}
+    expose:
+      - 5432
+    networks:
+      - dbnet
+    env_file:
+      - .env
+
+  cache:
+    container_name: redis-cache
+    image: redis:7.2.5
+    expose:
+      - 6379
+    networks:
+      - cachenet
+
+  proxy:
+    container_name: nginx-proxy
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    depends_on:
+      webapp:
+        condition: service_started
+    networks:
+      - proxynet
+    ports:
+      - 80:80
+
+networks:
+  cachenet:
+  dbnet:
+  proxynet:
+
+## network
+## volumn
+
