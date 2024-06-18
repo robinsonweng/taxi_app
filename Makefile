@@ -30,15 +30,11 @@ dev-install: env
 # docker compose command shortcut
 .PHONY: up
 up:
-	docker compose -f dev.yml up
+	docker compose -f dev.yml up --watch
 
 .PHONY: down
 down:
 	docker compose -f dev.yml down --rmi local
-
-.PHONY: watch
-watch:
-	docker compose -f dev.yml watch
 
 .PHONE: freeze-dev
 freeze-dev:
