@@ -15,12 +15,8 @@ services:
       - proxynet
     env_file:
       - .env
-    develop:
-      watch:
-        - action: sync+restart
-          path: ./webapp
-          target: /app
-
+    volumes:
+      - ./webapp:/app
     expose:
       - 8000
 
