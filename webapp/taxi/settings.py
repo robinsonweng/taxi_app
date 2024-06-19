@@ -49,7 +49,10 @@ SECRET_KEY = 'django-insecure-j16ld!zp_-^ry#&!5%4+8z=h*trg_x0ulf(k)c3v-x407wv9kk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # for dev only
+    'loadbalancer'
+]
 
 
 # Application definition
