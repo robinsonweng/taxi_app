@@ -5,10 +5,12 @@
 - [x] docker
 - django
     - [ ] swagger
+    - [ ] social media oauth2 (google, line)
 - nginx
     - [ ] update config
     - [ ] ssl?
 - react
+    - [ ] social media oauth2 (google, line)
 
 
 ## other
