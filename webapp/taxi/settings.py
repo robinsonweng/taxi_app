@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # django apps
-    'apps.trips',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -156,7 +156,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'trips.User'
+AUTH_USER_MODEL = 'core.User'
 
 
 REDIS_URL = f"{environment_variable.redis.host}:{environment_variable.redis.port}"
