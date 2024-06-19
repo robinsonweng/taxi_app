@@ -19,6 +19,7 @@ services:
       - ./webapp:/app
     expose:
       - 8000
+    restart: on-failure
 
   db:
     container_name: postgres-db
