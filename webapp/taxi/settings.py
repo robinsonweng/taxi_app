@@ -70,7 +70,8 @@ INSTALLED_APPS = [
     'drf_spectacular',
 
     # django apps
-    'core',
+    'apps.core',
+    'apps.user',
 ]
 
 MIDDLEWARE = [
@@ -171,7 +172,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'user.User'
 
 REDIS_URL = f"{environment_variable.redis.host}:{environment_variable.redis.port}"
 
