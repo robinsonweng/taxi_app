@@ -36,10 +36,10 @@ up:
 down:
 	docker compose -f dev.yml down --rmi local
 
-.PHONE: freeze-dev
+.PHONY: freeze-dev
 freeze-dev:
 	./$(VENV_PATH)/bin/pip freeze > $(WEBAPP_PATH)/requirements/dev.txt
 
-.PHONE: freeze-prod
+.PHONY: freeze-prod
 freeze-prod:
 	./$(VENV_PATH)/bin/pip freeze > $(WEBAPP_PATH)/requirements/prod.txt
