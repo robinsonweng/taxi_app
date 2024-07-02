@@ -43,3 +43,9 @@ freeze-dev:
 .PHONY: freeze-prod
 freeze-prod:
 	./$(VENV_PATH)/bin/pip freeze > $(WEBAPP_PATH)/requirements/prod.txt
+
+# for django
+.PHONY: test
+test:
+	# TODO create a setting for test use case
+	docker exec -it django-app bash -c "python3 -m pytest --ds=taxi.settings tests/"
